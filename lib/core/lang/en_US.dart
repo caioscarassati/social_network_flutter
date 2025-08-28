@@ -1,0 +1,27 @@
+const Map<String, String> enUS = {
+  'app_title': 'Social Network',
+  'login_title': 'Login',
+  'email_hint': 'Email',
+  'password_hint': 'Password',
+  'login_button': 'Login',
+  'users_title': 'Users',
+  'posts_title': 'Posts',
+  'logout_button': 'Logout',
+  'error_title': 'Error',
+  'error_generic': 'An unexpected error occurred. Please try again.',
+  'error_login_failed': 'Invalid email or password.',
+  'error_invalid_email': 'Please enter a valid email.',
+  'error_empty_password': 'Please enter your password.',
+  'error_password_length': 'Password must be at least 6 characters long.',
+  'search_hint': 'Search by name...',
+  'no_users_found': 'No users found.',
+  'added_to_favorites': 'Added to Favorites',
+  'removed_from_favorites': 'Removed from Favorites',
+  'profile_job': 'Job Title',
+  'profile_area': 'Area',
+  'profile_bio': 'Biography',
+  'profile_close': 'Close',
+  'profile_details_button': 'Learn more',
+  'nav_bar_users': 'Users', // <-- NOVO
+  'nav_bar_posts': 'Posts',   // <-- NOVO
+};

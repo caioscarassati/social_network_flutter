@@ -1,0 +1,27 @@
+const Map<String, String> ptBR = {
+  'app_title': 'Rede Social',
+  'login_title': 'Login',
+  'email_hint': 'E-mail',
+  'password_hint': 'Senha',
+  'login_button': 'Entrar',
+  'users_title': 'Usuários',
+  'posts_title': 'Postagens',
+  'logout_button': 'Sair',
+  'error_title': 'Erro',
+  'error_generic': 'Ocorreu um erro inesperado. Tente novamente.',
+  'error_login_failed': 'E-mail ou senha inválidos.',
+  'error_invalid_email': 'Por favor, insira um e-mail válido.',
+  'error_empty_password': 'Por favor, insira sua senha.',
+  'error_password_length': 'A senha deve ter no mínimo 6 caracteres.',
+  'search_hint': 'Pesquisar por nome...',
+  'no_users_found': 'Nenhum usuário encontrado.',
+  'added_to_favorites': 'Adicionado aos Favoritos',
+  'removed_from_favorites': 'Removido dos Favoritos',
+  'profile_job': 'Cargo',
+  'profile_area': 'Área',
+  'profile_bio': 'Biografia',
+  'profile_close': 'Fechar',
+  'profile_details_button': 'Saiba mais',
+  'nav_bar_users': 'Usuários', // <-- NOVO
+  'nav_bar_posts': 'Posts',     // <-- NOVO
+};
