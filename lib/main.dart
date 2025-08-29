@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/date_symbol_data_local.dart'; // <-- NOVO IMPORT
+import 'package:intl/date_symbol_data_local.dart';  
 import 'package:social_network/app/data/models/post_cache_model.dart';
 import 'package:social_network/app/data/models/user_cache_model.dart';
 import 'package:social_network/app/data/models/user_model.dart';
@@ -39,7 +39,7 @@ Future<void> _seedInitialUser() async {
     final adminUser = User(
       id: const Uuid().v4(),
       email: 'admin@email.com',
-      password: 'admin123', // <-- ATUALIZADO
+      password: 'admin123',
       name: 'Admin User',
     );
     await localUserProvider.addUser(adminUser);
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
       translations: AppTranslations(),
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
-      initialRoute: AppPages.INITIAL,
+      initialRoute: AppPages.initial,
       getPages: AppPages.routes,
     );
   }

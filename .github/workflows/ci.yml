@@ -12,13 +12,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: "11"
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+
+      # Cria um arquivo .env a partir do exemplo antes de rodar os comandos do Flutter.
+      # Isto resolve o erro "asset file '.env' doesn't exist".
+      - name: Create .env file
+        run: cp .env.example .env
 
       - name: Install dependencies
         run: flutter pub get

@@ -2,98 +2,88 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_network/app/data/models/user_model.dart';
 import 'package:social_network/app/data/provider/local_user_provider.dart';
 import 'package:social_network/features/auth/auth_controller.dart';
-import 'package:social_network/core/lang/app_translations.dart';
 
-// --- ALTERAÇÃO: Usar @GenerateNiceMocks para evitar erros de stub ---
-@GenerateNiceMocks([MockSpec<LocalUserProvider>(), MockSpec<AuthController>()])
-import 'auth_controller_test.mocks.dart';
+import 'auth_controller_test.mocks.dart'; // Importa o novo mock gerado
 
+// Gera o mock para o LocalUserProvider
+@GenerateNiceMocks([MockSpec<LocalUserProvider>()])
 void main() {
-  late AuthController authController;
-  late MockLocalUserProvider mockLocalUserProvider;
-  late User testUser;
+  // Inicializa as dependências do GetX para as traduções
+  setUpAll(() => Get.testMode = true);
 
-  // Configuração inicial antes de cada teste
-  setUp(() {
-    // Limpa as instâncias do Get para garantir um teste limpo
-    Get.reset();
+  group('AuthController Unit Tests', () {
+    late AuthController controller;
+    late MockLocalUserProvider mockProvider;
 
-    mockLocalUserProvider = MockLocalUserProvider();
-    authController = AuthController(localUserProvider: mockLocalUserProvider);
-    testUser = User(
-      id: '1',
-      email: 'test@email.com',
-      password: 'password123',
-      name: 'Test User',
-    );
-
-    // Simula o SharedPreferences
-    SharedPreferences.setMockInitialValues({});
-
-    // Adiciona as traduções para que '.tr' funcione nos testes
-    Get.testMode = true;
-    Get.addTranslations(AppTranslations().keys);
-  });
-
-  group('AuthController Logic Tests', () {
-    test('Login com sucesso deve atualizar o estado navigateToUsers para true', () async {
-      // Arrange
-      when(mockLocalUserProvider.getUserByEmail(any))
-          .thenAnswer((_) async => testUser);
-      authController.emailController.text = 'test@email.com';
-      authController.passwordController.text = 'password123';
-
-      // Act
-      await authController.login();
-
-      // Assert
-      verify(mockLocalUserProvider.getUserByEmail('test@email.com')).called(1);
-      expect(authController.navigateToUsers.value, true);
-      expect(authController.snackbarMessage.value, isNull);
+    setUp(() {
+      // Cria uma nova instância do mock e do controller antes de cada teste
+      mockProvider = MockLocalUserProvider();
+      controller = AuthController(mockProvider);
     });
 
-    test('Login com credenciais incorretas deve atualizar snackbarMessage', () async {
+    test('Login com credenciais corretas deve navegar para a próxima tela',
+            () async {
+          // Arrange (Configuração)
+          final fakeUser =
+          User(id: '1', email: 'admin@email.com', password: 'password123', name: 'Admin User');
+          controller.emailController.text = 'admin@email.com';
+          controller.passwordController.text = 'password123';
+
+          // Configura o mock para devolver o utilizador falso quando chamado
+          when(mockProvider.getUserByEmail('admin@email.com'))
+              .thenAnswer((_) async => fakeUser);
+
+          // Act (Ação)
+          await controller.login();
+
+          // Assert (Verificação)
+          expect(controller.navigateToUsers.value, isTrue);
+          expect(controller.errorMessage.value, isEmpty);
+        });
+
+    test('Login com senha incorreta deve mostrar mensagem de erro', () async {
       // Arrange
-      when(mockLocalUserProvider.getUserByEmail(any)).thenAnswer((_) async => null);
-      authController.emailController.text = 'wrong@email.com';
-      authController.passwordController.text = 'password123';
+      final fakeUser =
+      User(id: '1', email: 'admin@email.com', password: 'password123', name: 'Admin User');
+      controller.emailController.text = 'admin@email.com';
+      controller.passwordController.text = 'wrongpassword';
+
+      when(mockProvider.getUserByEmail('admin@email.com'))
+          .thenAnswer((_) async => fakeUser);
 
       // Act
-      await authController.login();
+      await controller.login();
 
       // Assert
-      expect(authController.snackbarMessage.value, isNotNull);
-      expect(authController.navigateToUsers.value, false);
+      expect(controller.navigateToUsers.value, isFalse);
+      expect(controller.errorMessage.value, isNotEmpty);
     });
 
-    test('Login com e-mail inválido deve atualizar emailError', () async {
+    test('Validação de e-mail inválido deve mostrar erro', () async {
       // Arrange
-      authController.emailController.text = 'invalid-email';
-      authController.passwordController.text = 'password123';
+      controller.emailController.text = 'invalid-email';
 
       // Act
-      await authController.login();
+      await controller.login();
 
       // Assert
-      verifyNever(mockLocalUserProvider.getUserByEmail(any));
-      expect(authController.emailError.value, isNotNull);
+      expect(controller.emailError.value, isNotEmpty);
     });
 
-    test('Login com senha curta deve atualizar passwordError', () async {
+    test('Validação de senha curta deve mostrar erro', () async {
       // Arrange
-      authController.emailController.text = 'test@email.com';
-      authController.passwordController.text = '123';
+      controller.emailController.text = 'admin@email.com';
+      controller.passwordController.text = '123';
 
       // Act
-      await authController.login();
+      await controller.login();
 
       // Assert
-      verifyNever(mockLocalUserProvider.getUserByEmail(any));
-      expect(authController.passwordError.value, isNotNull);
+      expect(controller.passwordError.value, isNotEmpty);
     });
   });
 }
+

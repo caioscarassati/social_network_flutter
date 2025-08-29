@@ -43,7 +43,7 @@ final ThemeData appThemeData = ThemeData(
   ),
 
   // Tema do Card
-  cardTheme: CardThemeData( // <-- CORRIGIDO
+  cardTheme: CardThemeData(
     elevation: 4.0,
     color: AppColors.card,
     shape: RoundedRectangleBorder(

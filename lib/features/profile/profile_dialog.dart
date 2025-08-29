@@ -32,7 +32,7 @@ class ProfileDialog extends GetView<ProfileController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // --- ATUALIZADO: Usa as chaves de tradução ---
+           
             _buildDetailRow(Icons.email, 'email_hint'.tr, controller.user.email),
             const Divider(),
             _buildDetailRow(Icons.work, 'profile_job'.tr, controller.jobTitle),

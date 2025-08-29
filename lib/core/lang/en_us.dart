@@ -22,6 +22,6 @@ const Map<String, String> enUS = {
   'profile_bio': 'Biography',
   'profile_close': 'Close',
   'profile_details_button': 'Learn more',
-  'nav_bar_users': 'Users', // <-- NOVO
-  'nav_bar_posts': 'Posts',   // <-- NOVO
+  'nav_bar_users': 'Users',
+  'nav_bar_posts': 'Posts',
 };

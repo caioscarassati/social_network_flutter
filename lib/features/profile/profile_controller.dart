@@ -32,7 +32,6 @@ class ProfileController extends GetxController {
     _cacheProvider.updateFavoriteStatus(user.id, isFavorite.value);
 
     Get.snackbar(
-      // --- ATUALIZADO: Usa as chaves de tradução ---
       isFavorite.value ? 'added_to_favorites'.tr : 'removed_from_favorites'.tr,
       '${user.firstName} ${user.lastName}',
       snackPosition: SnackPosition.BOTTOM,

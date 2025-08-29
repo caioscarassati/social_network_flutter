@@ -22,6 +22,6 @@ const Map<String, String> ptBR = {
   'profile_bio': 'Biografia',
   'profile_close': 'Fechar',
   'profile_details_button': 'Saiba mais',
-  'nav_bar_users': 'Usuários', // <-- NOVO
-  'nav_bar_posts': 'Posts',     // <-- NOVO
+  'nav_bar_users': 'Usuários',
+  'nav_bar_posts': 'Posts',
 };

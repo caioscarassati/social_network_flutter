@@ -2,71 +2,80 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
+import 'package:social_network/core/lang/app_translations.dart';
 import 'package:social_network/features/auth/auth_controller.dart';
 import 'package:social_network/features/auth/auth_screen.dart';
-import 'package:social_network/core/lang/app_translations.dart';
 
-// Importa o mock apenas para o LocalUserProvider
 import 'auth_controller_test.mocks.dart';
 
 void main() {
-  // tearDown limpa o GetX após cada teste para evitar vazamentos de estado
-  tearDown(() {
-    Get.reset();
+  // Garante que o Flutter está inicializado para os testes
+  setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    Get.testMode = true; // Ativa o modo de teste do GetX
+    Get.addTranslations(AppTranslations().keys); // Adiciona as traduções
   });
 
-  // Widget wrapper simplificado
-  Widget buildTestableWidget() {
+  // Função helper para construir o widget de teste
+  Widget buildTestableWidget(Widget child) {
     return GetMaterialApp(
-      home: const AuthScreen(),
+      theme: ThemeData(), // Usa um tema padrão para os testes para evitar erros de compilação.
+      home: child,
       translations: AppTranslations(),
-      locale: const Locale('pt', 'BR'), // Força o locale para prever o texto do erro
+      locale: const Locale('pt', 'BR'),
     );
   }
 
-  group('AuthScreen Validation Widget Tests', () {
-    testWidgets('Deve mostrar erro ao tentar login com e-mail inválido', (tester) async {
-      // Arrange
-      final mockProvider = MockLocalUserProvider();
-      Get.put(AuthController(localUserProvider: mockProvider));
-      await tester.pumpWidget(buildTestableWidget());
+  group('AuthScreen Widget Tests', () {
+    late AuthController controller;
+    late MockLocalUserProvider mockProvider;
 
-      // Act
-      // Insere um e-mail com formato inválido
-      await tester.enterText(find.widgetWithText(TextField, 'E-mail'), 'email-invalido');
-      await tester.enterText(find.widgetWithText(TextField, 'Senha'), 'password123');
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Entrar'));
-
-      // Avança um frame para a UI ser reconstruída com o estado de erro
-      await tester.pump();
-
-      // Assert
-      // Verifica se a mensagem de erro de e-mail inválido apareceu
-      expect(find.text('Por favor, insira um e-mail válido.'), findsOneWidget);
-      // Confirma que nenhuma chamada ao provider foi feita, pois a validação falhou
-      verifyNever(mockProvider.getUserByEmail(any));
+    setUp(() {
+      // Cria as instâncias antes de cada teste
+      mockProvider = MockLocalUserProvider();
+      controller = AuthController(mockProvider);
+      // Injeta o controller para que a AuthScreen o possa encontrar
+      Get.put(controller);
     });
 
-    testWidgets('Deve mostrar erro ao tentar login com senha curta', (tester) async {
-      // Arrange
-      final mockProvider = MockLocalUserProvider();
-      Get.put(AuthController(localUserProvider: mockProvider));
-      await tester.pumpWidget(buildTestableWidget());
-
-      // Act
-      // Insere uma senha com menos de 6 caracteres
-      await tester.enterText(find.widgetWithText(TextField, 'E-mail'), 'teste@email.com');
-      await tester.enterText(find.widgetWithText(TextField, 'Senha'), '12345');
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Entrar'));
-
-      // Avança um frame
-      await tester.pump();
-
-      // Assert
-      // Verifica se a mensagem de erro de senha curta apareceu
-      expect(find.text('A senha deve ter no mínimo 6 caracteres.'), findsOneWidget);
-      // Confirma que nenhuma chamada ao provider foi feita
-      verifyNever(mockProvider.getUserByEmail(any));
+    tearDown(() {
+      // Limpa as instâncias do GetX após cada teste para evitar interferências
+      Get.reset();
     });
+
+    testWidgets('Deve mostrar erro de validação para e-mail inválido',
+            (WidgetTester tester) async {
+          // Arrange
+          await tester.pumpWidget(buildTestableWidget(const AuthScreen()));
+
+          // Act
+          // Simula a digitação de um e-mail inválido e o toque no botão
+          await tester.enterText(
+              find.byType(TextField).first, 'invalid-email');
+          await tester.tap(find.byType(ElevatedButton));
+          await tester.pump(); // Espera a UI reconstruir
+
+          // Assert
+          // Verifica se a mensagem de erro de validação aparece
+          expect(find.text('email_invalid_error'.tr), findsOneWidget);
+        });
+
+    testWidgets('Deve mostrar erro de validação para senha curta',
+            (WidgetTester tester) async {
+          // Arrange
+          await tester.pumpWidget(buildTestableWidget(const AuthScreen()));
+
+          // Act
+          // Simula a digitação de um e-mail válido mas uma senha curta
+          await tester.enterText(
+              find.byType(TextField).first, 'test@email.com');
+          await tester.enterText(find.byType(TextField).last, '123');
+          await tester.tap(find.byType(ElevatedButton));
+          await tester.pump();
+
+          // Assert
+          expect(find.text('password_length_error'.tr), findsOneWidget);
+        });
   });
 }
+

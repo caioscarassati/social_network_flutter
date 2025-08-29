@@ -1,8 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart'; // <-- NOVO IMPORT
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_network/app/data/models/user_cache_model.dart';
-import 'package:social_network/features/profile/profile_dialog.dart';
 import 'package:social_network/features/users/users_controller.dart';
 
 class UsersScreen extends GetView<UsersController> {
@@ -170,7 +169,6 @@ class UserGridItem extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      // --- ALTERAÇÃO: Substituído o botão por um texto estilizado ---
                       Padding(
                         padding: const EdgeInsets.only(top: 4, bottom: 6), // Margem inferior de 6
                         child: Text(

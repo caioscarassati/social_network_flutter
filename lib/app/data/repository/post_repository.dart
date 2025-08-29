@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart'; // <-- NOVO IMPORT
+import 'package:flutter/foundation.dart';  
 import 'package:social_network/app/data/models/post_cache_model.dart';
 import 'package:social_network/app/data/models/post_model.dart';
 import 'package:social_network/app/data/provider/local_post_cache_provider.dart';
