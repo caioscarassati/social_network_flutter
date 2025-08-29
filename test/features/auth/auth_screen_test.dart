@@ -42,6 +42,8 @@ void main() {
       Get.reset();
     });
 
+
+
     testWidgets('Deve mostrar erro de validação para e-mail inválido',
             (WidgetTester tester) async {
           // Arrange
@@ -56,7 +58,7 @@ void main() {
 
           // Assert
           // Verifica se a mensagem de erro de validação aparece
-          expect(find.text('email_invalid_error'.tr), findsOneWidget);
+          expect(find.text('error_invalid_email'.tr), findsOneWidget);
         });
 
     testWidgets('Deve mostrar erro de validação para senha curta',
@@ -73,7 +75,7 @@ void main() {
           await tester.pump();
 
           // Assert
-          expect(find.text('password_length_error'.tr), findsOneWidget);
+          expect(find.text('error_password_length'.tr), findsOneWidget);
         });
   });
 }
