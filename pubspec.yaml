@@ -30,6 +30,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   faker: ^2.2.0
   cached_network_image: ^3.4.1
+  flutter_native_splash: ^2.4.6
 
 
 
@@ -41,6 +42,27 @@ dev_dependencies:
   hive_generator: ^2.0.1
   mockito: ^5.4.4
   flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.14.4
+
+# Configuração para o gerador de ícones
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
+  adaptive_icon_background: "#FFFFFF" # Cor de fundo para o ícone adaptável do Android
+  adaptive_icon_foreground: "assets/images/icon.png" # A sua imagem principal
+  web:
+    generate: true
+    image_path: "assets/images/splash-web.png"
+    background_color: "#FFFFFF"
+    theme_color: "#FFFFFF"
+# Configuração para a splash screen nativa
+flutter_native_splash:
+  color: "#FFFFFF" # Cor de fundo da splash screen
+  image: assets/images/splash.png # A imagem que será exibida
+  android: true
+  ios: true
+
 
 flutter:
   uses-material-design: true
