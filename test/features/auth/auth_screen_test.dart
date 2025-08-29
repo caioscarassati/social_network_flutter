@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
-import 'package:mockito/mockito.dart';
 import 'package:social_network/core/lang/app_translations.dart';
 import 'package:social_network/features/auth/auth_controller.dart';
 import 'package:social_network/features/auth/auth_screen.dart';
