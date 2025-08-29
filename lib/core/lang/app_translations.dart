@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:social_network/core/lang/en_US.dart';
-import 'package:social_network/core/lang/pt_BR.dart';
+import 'package:social_network/core/lang/en_us.dart';
+import 'package:social_network/core/lang/pt_br.dart';
 
 class AppTranslations extends Translations {
   @override

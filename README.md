@@ -8,8 +8,7 @@ A aplicação permite que os utilizadores façam login, visualizem uma lista de 
 
 ## Decisões Técnicas
 
--   **Gerenciamento de Estado e Arquitetura:** 
-    -   **GetX** foi escolhido pela sua simplicidade, performance e pelo ecossistema completo que oferece. A arquitetura segue um padrão **MVC (Model-View-Controller)**, com uma clara separação de responsabilidades:
+-   **Gerenciamento de Estado e Arquitetura:** **GetX** foi escolhido pela sua simplicidade, performance e pelo ecossistema completo que oferece. A arquitetura segue um padrão **MVC (Model-View-Controller)**, com uma clara separação de responsabilidades:
     -   **View (Screen):** Responsável apenas por exibir a UI e reagir às mudanças de estado do Controller.
     -   **Controller:** Contém toda a lógica de negócio, gestão de estado e interações do utilizador.
     -   **Binding:** Gere a injeção de dependências, inicializando os controllers e repositórios necessários para cada feature.
@@ -25,19 +24,23 @@ A aplicação permite que os utilizadores façam login, visualizem uma lista de 
     -   **Testes Unitários:** Escritos para os `Controllers` para validar a lógica de negócio de forma isolada.
     -   **Testes de Widget:** Escritos para as `Screens` para garantir que a UI responde corretamente às interações do utilizador e às mudanças de estado.
 
+-   **Integração Contínua (CI):** O projeto está configurado com **GitHub Actions** para garantir a qualidade e a estabilidade do código. O fluxo de trabalho, localizado em `.github/workflows/ci.yml`, é acionado a cada `push` ou `pull request` para o branch `main` e executa automaticamente os seguintes passos:
+    -   `flutter analyze`: Verifica o código em busca de erros de lint e potenciais problemas.
+    -   `flutter test`: Roda todos os testes unitários e de widget do projeto.
+
 ## Como Rodar Localmente
 
 ### Pré-requisitos
 
--   Flutter SDK (versão  3.35.2 • channel stable  ou superior)
+-   Flutter SDK (versão 3.35.2 • channel stable ou superior)
 -   Um emulador Android ou iOS, ou um dispositivo físico
 
 ### Passos para Execução
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/seu-usuario/social_network.git](https://github.com/seu-usuario/social_network.git)
-    cd social_network
+    git clone [https://github.com/caioscarassati/social_network_flutter.git](https://github.com/caioscarassati/social_network_flutter.git)
+    cd social_network_flutter
     ```
 
 2.  **Crie o arquivo de ambiente:**
@@ -62,6 +65,11 @@ A aplicação permite que os utilizadores façam login, visualizem uma lista de 
     flutter run
     ```
 
+### Credenciais de Acesso para Teste
+-   **Email:** `admin@email.com`
+-   **Senha:** `admin123`
+
+
 ## Como Rodar os Testes
 
 Para executar todos os testes unitários e de widget definidos no projeto, siga estes passos:
@@ -76,4 +84,5 @@ Para executar todos os testes unitários e de widget definidos no projeto, siga 
     Use o seguinte comando para rodar todos os testes do projeto.
     ```bash
     flutter test
-    
+    ```
+

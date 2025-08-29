@@ -6,7 +6,7 @@ import 'package:social_network/features/dashboard/dashboard_screen.dart';
 
 abstract class Routes {
   Routes._();
-  static const AUTH = '/auth';
+  static const auth = '/auth';
   static const DASHBOARD = '/dashboard';
 }
 
@@ -14,11 +14,11 @@ class AppPages {
   AppPages._();
 
   // A rota inicial continua a ser a de autenticação
-  static const INITIAL = Routes.AUTH;
+  static const INITIAL = Routes.auth;
 
   static final routes = [
     GetPage(
-      name: Routes.AUTH,
+      name: Routes.auth,
       page: () => const AuthScreen(),
       binding: AuthBinding(),
     ),

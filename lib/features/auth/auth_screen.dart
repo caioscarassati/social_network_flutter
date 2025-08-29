@@ -35,7 +35,7 @@ class _AuthScreenState extends State<AuthScreen> {
     // "Ouvinte" para o sinal de navegação
     ever(controller.navigateToUsers, (bool navigate) {
       if (navigate) {
-        // --- CORREÇÃO: Navega para a nova tela de Dashboard ---
+        //  Navega para a nova tela de Dashboard ---
         Get.offAllNamed(Routes.DASHBOARD);
       }
     });

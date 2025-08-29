@@ -64,7 +64,7 @@ class UsersController extends GetxController {
     try {
       final result = await userRepository.getUsers(page: _currentPage.value);
 
-      // --- CORREÇÃO: Mapeia os modelos da API para modelos de Cache ---
+      // Mapeia os modelos da API para modelos de Cache ---
       final mappedUsers = result.data.map((apiUser) => UserCacheModel(
         id: apiUser.id,
         email: apiUser.email,
@@ -101,7 +101,7 @@ class UsersController extends GetxController {
     try {
       final result = await userRepository.getUsers(page: _currentPage.value);
 
-      // --- CORREÇÃO: Mapeia os modelos da API para modelos de Cache ---
+      //  Mapeia os modelos da API para modelos de Cache ---
       final mappedUsers = result.data.map((apiUser) => UserCacheModel(
         id: apiUser.id,
         email: apiUser.email,
@@ -116,7 +116,7 @@ class UsersController extends GetxController {
       }
       _hasNextPage.value = result.page < result.totalPages;
     } catch (e) {
-      print("Erro ao carregar mais usuários: $e");
+      debugPrint("Erro ao carregar mais usuários: $e");
     } finally {
       isLoadMoreRunning.value = false;
     }
@@ -176,6 +176,6 @@ class UsersController extends GetxController {
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('auth_token');
-    Get.offAllNamed(Routes.AUTH);
+    Get.offAllNamed(Routes.auth);
   }
 }

@@ -19,7 +19,7 @@ class UserRepository {
 
       final cacheUsers = apiResponse.data.map((apiUser) => _mapApiToCache(apiUser)).toList();
 
-      // --- CORREÇÃO: Lógica inteligente de cache ---
+      //  Lógica inteligente de cache ---
       // Se for a primeira página (refresh), substitui o cache.
       // Se for uma página subsequente, adiciona ao cache.
       if (page == 1) {

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart'; // <-- NOVO IMPORT
 import 'package:social_network/app/data/models/post_cache_model.dart';
 import 'package:social_network/app/data/models/post_model.dart';
 import 'package:social_network/app/data/provider/local_post_cache_provider.dart';
@@ -27,7 +28,7 @@ class PostRepository {
       return cachePosts;
     } catch (e) {
       // Se a busca "online" falhar, recorre ao cache
-      print("Falha ao buscar posts, carregando do cache: $e");
+      debugPrint("Falha ao buscar posts, carregando do cache: $e");
       return await _localPostCacheProvider.getPosts();
     }
   }

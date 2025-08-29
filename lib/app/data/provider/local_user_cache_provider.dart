@@ -46,7 +46,7 @@ class LocalUserCacheProvider {
   // Busca apenas os utilizadores favoritos
   Future<List<UserCacheModel>> getFavoriteUsers() async {
     final box = await Hive.openBox<UserCacheModel>(_userListBoxName);
-    // --- CORREÇÃO: Usa uma verificação segura para valores nulos ---
+    //  Usa uma verificação segura para valores nulos ---
     return box.values.where((user) => user.isFavorite == true).toList();
   }
 

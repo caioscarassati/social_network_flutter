@@ -19,7 +19,7 @@ class UserCacheModel extends HiveObject {
   @HiveField(4)
   late String avatar;
 
-  // --- CORREÇÃO: Permite que o valor seja nulo ---
+  //  Permite que o valor seja nulo ---
   @HiveField(5)
   bool? isFavorite;
 

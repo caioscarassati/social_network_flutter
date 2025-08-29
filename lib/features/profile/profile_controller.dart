@@ -22,7 +22,7 @@ class ProfileController extends GetxController {
     jobTitle = faker.job.title();
     department = faker.company.name();
     biography = faker.lorem.sentences(3).join(' ');
-    // --- CORREÇÃO: Trata o valor nulo, assumindo 'false' como padrão ---
+    //  Trata o valor nulo, assumindo 'false' como padrão ---
     isFavorite.value = user.isFavorite ?? false;
   }
 

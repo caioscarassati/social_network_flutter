@@ -15,7 +15,7 @@ import 'package:uuid/uuid.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // --- CORREÇÃO: Inicializa a formatação de data ---
+  //  Inicializa a formatação de data ---
   await initializeDateFormatting();
 
   await dotenv.load(fileName: ".env");

@@ -90,7 +90,7 @@ class UsersScreen extends GetView<UsersController> {
           decoration: InputDecoration(
             hintText: 'search_hint'.tr,
             border: InputBorder.none,
-            // --- CORREÇÃO: 'withOpacity' substituído por 'withAlpha' ---
+            //  'withOpacity' substituído por 'withAlpha' ---
             hintStyle: TextStyle(color: Colors.white.withAlpha(179)),
           ),
           style: const TextStyle(color: Colors.white),
@@ -181,7 +181,7 @@ class UserGridItem extends StatelessWidget {
                             shadows: [
                               Shadow(
                                 blurRadius: 2.0,
-                                // --- CORREÇÃO: 'withOpacity' substituído por 'withAlpha' ---
+                                //  'withOpacity' substituído por 'withAlpha' ---
                                 color: Colors.black.withAlpha(64), // 0.25 de opacidade
                                 offset: const Offset(1.0, 1.0),
                               ),

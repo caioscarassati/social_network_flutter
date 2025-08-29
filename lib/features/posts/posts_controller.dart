@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:social_network/app/data/models/post_cache_model.dart';
 import 'package:social_network/app/data/repository/post_repository.dart';
@@ -26,7 +27,7 @@ class PostsController extends GetxController {
       posts.assignAll(result);
       status.value = Status.success;
     } catch (e) {
-      print("Erro ao buscar posts: $e");
+      debugPrint("Erro ao buscar posts: $e");
       status.value = Status.error;
     }
   }
