@@ -14,7 +14,7 @@ class AppPages {
   AppPages._();
 
   // A rota inicial continua a ser a de autenticação
-  static const initial = Routes.auth;
+  static const initial = Routes.dashborard;
 
   static final routes = [
     GetPage(

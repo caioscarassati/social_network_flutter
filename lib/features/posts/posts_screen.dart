@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:social_network/app/data/models/post_cache_model.dart';
+import 'package:social_network/app/ui/utils/responsive.dart';
 import 'package:social_network/features/posts/posts_controller.dart';
 import 'package:social_network/features/users/users_controller.dart'; // Reutiliza o enum Status
 
@@ -12,29 +13,44 @@ class PostsScreen extends GetView<PostsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('posts_title'.tr),
-      ),
-      body: Obx(
-            () {
-          switch (controller.status.value) {
-            case Status.loading:
-              return const Center(child: CircularProgressIndicator());
-            case Status.error:
-              return Center(child: Text('error_generic'.tr));
-            case Status.success:
-              return RefreshIndicator(
-                onRefresh: controller.fetchPosts,
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(8.0),
-                  itemCount: controller.posts.length,
-                  itemBuilder: (context, index) {
-                    final post = controller.posts[index];
-                    return PostCard(post: post);
-                  },
+      appBar: AppBar(title: Text('posts_title'.tr)),
+      body: Obx(() {
+        switch (controller.status.value) {
+          case Status.loading:
+            return const Center(child: CircularProgressIndicator());
+          case Status.error:
+            return Center(child: Text('error_generic'.tr));
+          case Status.success:
+            return Responsive(
+              mobile: feedList(),
+              tablet: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 500),
+                  child: feedList(),
                 ),
-              );
-          }
+              ),
+              desktop: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: feedList(),
+                ),
+              ),
+
+            );
+        }
+      }),
+    );
+  }
+
+  RefreshIndicator feedList() {
+    return RefreshIndicator(
+      onRefresh: controller.fetchPosts,
+      child: ListView.builder(
+        padding: const EdgeInsets.all(8.0),
+        itemCount: controller.posts.length,
+        itemBuilder: (context, index) {
+          final post = controller.posts[index];
+          return PostCard(post: post);
         },
       ),
     );
@@ -61,7 +77,9 @@ class PostCard extends StatelessWidget {
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(post.authorAvatarUrl),
+                  backgroundImage: CachedNetworkImageProvider(
+                    post.authorAvatarUrl,
+                  ),
                 ),
                 const SizedBox(width: 12.0),
                 Column(
@@ -69,7 +87,9 @@ class PostCard extends StatelessWidget {
                   children: [
                     Text(post.authorName, style: Get.textTheme.titleMedium),
                     Text(
-                      DateFormat.yMMMd(Get.locale.toString()).format(post.createdAt),
+                      DateFormat.yMMMd(
+                        Get.locale.toString(),
+                      ).format(post.createdAt),
                       style: Get.textTheme.bodySmall,
                     ),
                   ],
@@ -78,17 +98,20 @@ class PostCard extends StatelessWidget {
             ),
           ),
           // Imagem do post
-          CachedNetworkImage(
-            imageUrl: post.imageUrl,
-            fit: BoxFit.cover,
-            height: 250,
-            width: double.infinity,
-            placeholder: (context, url) => Container(
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: CachedNetworkImage(
+              imageUrl: post.imageUrl,
+              fit: BoxFit.cover,
               height: 250,
-              color: Colors.grey[200],
-              child: const Center(child: CircularProgressIndicator()),
+              width: double.infinity,
+              placeholder: (context, url) => Container(
+                height: 250,
+                color: Colors.grey[200],
+                child: const Center(child: CircularProgressIndicator()),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
           // Texto do post
           Padding(

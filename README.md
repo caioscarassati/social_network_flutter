@@ -4,8 +4,11 @@
 
 Este é um projeto MVP (Minimum Viable Product) de uma aplicação de rede social desenvolvida com Flutter. O objetivo principal é demonstrar uma arquitetura robusta, escalável e testável utilizando o framework **GetX** para gestão de estado, rotas e injeção de dependências.
 
-A aplicação permite que os utilizadores façam login, visualizem uma lista de outros utilizadores com paginação infinita, pesquisem, favoritem perfis (com persistência local) e vejam um feed de postagens com suporte offline completo, incluindo imagens.
+A aplicação permite que os utilizadores façam login, visualizem uma lista de outros utilizadores com paginação infinita, pesquisem, favoritem perfis (com persistência local) e vejam um feed de postagens com suporte offline completo, incluindo imagens, c
 
+Layout Responsivo: A interface adapta-se a diferentes tamanhos de tamanhos, oferecendo uma experiência otimizada tanto em telefone como em tablets/desktops.
+
+Suporte a Múltiplos Idiomas: A aplicação está preparada para internacionalização (i18n), com suporte para Português e Inglês.
 ## Decisões Técnicas
 
 -   **Gerenciamento de Estado e Arquitetura:** **GetX** foi escolhido pela sua simplicidade, performance e pelo ecossistema completo que oferece. A arquitetura segue um padrão **MVC (Model-View-Controller)**, com uma clara separação de responsabilidades:
@@ -39,8 +42,7 @@ A aplicação permite que os utilizadores façam login, visualizem uma lista de 
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/caioscarassati/social_network_flutter.git](https://github.com/caioscarassati/social_network_flutter.git)
-    cd social_network_flutter
+    git clone https://github.com/caioscarassati/social_network_flutter.git
     ```
 
 2.  **Crie o arquivo de ambiente:**
