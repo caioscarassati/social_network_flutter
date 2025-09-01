@@ -20,7 +20,7 @@ void main() async {
   //  Inicializa a formatação de data ---
   await initializeDateFormatting();
 
-  await dotenv.load(fileName: ".env");
+
   await Hive.initFlutter();
 
   // Registar os TypeAdapters
@@ -29,7 +29,7 @@ void main() async {
   Hive.registerAdapter(PostCacheModelAdapter());
 
   await _seedInitialUser();
-
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
   await Future.delayed(const Duration(seconds: 3));
   FlutterNativeSplash.remove();

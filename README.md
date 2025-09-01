@@ -9,6 +9,7 @@ A aplicação permite que os utilizadores façam login, visualizem uma lista de 
 Layout Responsivo: A interface adapta-se a diferentes tamanhos de tamanhos, oferecendo uma experiência otimizada tanto em telefone como em tablets/desktops.
 
 Suporte a Múltiplos Idiomas: A aplicação está preparada para internacionalização (i18n), com suporte para Português e Inglês.
+
 ## Decisões Técnicas
 
 -   **Gerenciamento de Estado e Arquitetura:** **GetX** foi escolhido pela sua simplicidade, performance e pelo ecossistema completo que oferece. A arquitetura segue um padrão **MVC (Model-View-Controller)**, com uma clara separação de responsabilidades:
@@ -66,7 +67,10 @@ Suporte a Múltiplos Idiomas: A aplicação está preparada para internacionaliz
     ```bash
     flutter run
     ```
-
+6.  **Execute a aplicação no chrome local:**
+    ```bash
+    flutter run -d chrome
+    ```
 ### Credenciais de Acesso para Teste
 -   **Email:** `admin@email.com`
 -   **Senha:** `admin123`
