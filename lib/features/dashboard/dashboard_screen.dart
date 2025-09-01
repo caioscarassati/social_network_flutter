@@ -22,7 +22,7 @@ class DashboardScreen extends GetView<DashboardController> {
 
     return Obx(
           () => Responsive(
-        // --- Layout para Telemóvel ---
+        // --- Layout para telefone ---
         mobile: Scaffold(
           body: pageView,
           bottomNavigationBar: BottomNavigationBar(

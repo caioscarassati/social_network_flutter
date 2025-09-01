@@ -51,7 +51,7 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
         desktop: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 400),
+            constraints: const BoxConstraints(maxWidth: 500),
             child: _buildForm(context),
           ),
         ),
@@ -61,7 +61,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Widget _buildForm(BuildContext context) {
     return Center(
-      child: SingleChildScrollView(
+      child: Container(
         padding: const EdgeInsets.all(24.0),
         child: Card(
           elevation: 4.0,

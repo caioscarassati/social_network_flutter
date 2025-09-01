@@ -8,10 +8,11 @@ class UserProvider {
   UserProvider({required this.httpClient});
 
   final String _baseUrl = dotenv.env['BASE_URL'] ?? '';
+  final String _baseUrlS = dotenv.env['BASE_URL_SUPABASE'] ?? '';
 
   Future<UserApiResponseModel> getUsers({int page = 1}) async {
-    final String endpoint = (page == 1) ? '/users' : '/users?page=$page';
-    final Uri url = Uri.parse('$_baseUrl$endpoint');
+    final String endpoint = (page == 1) ? '/get-users' : '/get-users?page=$page';
+    final Uri url = Uri.parse('$_baseUrlS$endpoint');
 
     try {
       final response = await httpClient.get(url);

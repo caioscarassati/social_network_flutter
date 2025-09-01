@@ -46,3 +46,4 @@ app.*.map.json
 # Environment variables
 # IMPORTANT: Ignore environment files to keep sensitive keys secure.
 .env
+deploy.sh

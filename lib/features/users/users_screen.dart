@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:social_network/app/data/models/user_cache_model.dart';
 import 'package:social_network/features/users/users_controller.dart';
 
+import '../../app/ui/utils/responsive.dart';
+
 class UsersScreen extends GetView<UsersController> {
   const UsersScreen({super.key});
 
@@ -41,39 +43,58 @@ class UsersScreen extends GetView<UsersController> {
               if (controller.users.isEmpty) {
                 return Center(child: Text('no_users_found'.tr));
               }
-              return RefreshIndicator(
-                onRefresh: controller.fetchUsers,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: GridView.builder(
-                        controller: controller.scrollController,
-                        padding: const EdgeInsets.all(8.0),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8.0,
-                          mainAxisSpacing: 8.0,
-                          childAspectRatio: 0.8, // Reajustado para o novo layout
-                        ),
-                        itemCount: controller.users.length,
-                        itemBuilder: (context, index) {
-                          final user = controller.users[index];
-                          return UserGridItem(user: user);
-                        },
-                      ),
-                    ),
-                    if (controller.isLoadMoreRunning.value)
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
-                  ],
+              return Responsive(
+                mobile: userList(),
+                tablet: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 600),
+                    child: userList(),
+                  ),
                 ),
-              );
+                desktop: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 800),
+                    child: userList(),
+                  ),
+                ),
+
+              );;
           }
         },
       ),
     );
+  }
+
+  RefreshIndicator userList() {
+    return RefreshIndicator(
+              onRefresh: controller.fetchUsers,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: GridView.builder(
+                      controller: controller.scrollController,
+                      padding: const EdgeInsets.all(8.0),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                        childAspectRatio: 0.8, // Reajustado para o novo layout
+                      ),
+                      itemCount: controller.users.length,
+                      itemBuilder: (context, index) {
+                        final user = controller.users[index];
+                        return UserGridItem(user: user);
+                      },
+                    ),
+                  ),
+                  if (controller.isLoadMoreRunning.value)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                ],
+              ),
+            );
   }
 
   AppBar _buildAppBar() {

@@ -31,6 +31,7 @@ void main() async {
   await _seedInitialUser();
 
   runApp(const MyApp());
+  await Future.delayed(const Duration(seconds: 3));
   FlutterNativeSplash.remove();
 }
 

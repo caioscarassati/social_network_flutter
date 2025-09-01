@@ -51,11 +51,7 @@ flutter_launcher_icons:
   image_path: "assets/images/icon.png"
   adaptive_icon_background: "#FFFFFF" # Cor de fundo para o ícone adaptável do Android
   adaptive_icon_foreground: "assets/images/icon.png" # A sua imagem principal
-  web:
-    generate: true
-    image_path: "assets/images/splash-web.png"
-    background_color: "#FFFFFF"
-    theme_color: "#FFFFFF"
+
 # Configuração para a splash screen nativa
 flutter_native_splash:
   color: "#FFFFFF" # Cor de fundo da splash screen
