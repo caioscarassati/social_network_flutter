@@ -57,44 +57,40 @@ class UsersScreen extends GetView<UsersController> {
                     child: userList(),
                   ),
                 ),
-
-              );;
+              );
           }
         },
       ),
     );
   }
 
-  RefreshIndicator userList() {
-    return RefreshIndicator(
-              onRefresh: controller.fetchUsers,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: GridView.builder(
-                      controller: controller.scrollController,
-                      padding: const EdgeInsets.all(8.0),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 8.0,
-                        mainAxisSpacing: 8.0,
-                        childAspectRatio: 0.8, // Reajustado para o novo layout
-                      ),
-                      itemCount: controller.users.length,
-                      itemBuilder: (context, index) {
-                        final user = controller.users[index];
-                        return UserGridItem(user: user);
-                      },
-                    ),
-                  ),
-                  if (controller.isLoadMoreRunning.value)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      child: Center(child: CircularProgressIndicator()),
-                    ),
-                ],
-              ),
-            );
+  Column userList() {
+    return Column(
+      children: [
+        Expanded(
+          child: GridView.builder(
+            controller: controller.scrollController,
+            padding: const EdgeInsets.all(8.0),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
+              childAspectRatio: 0.8,
+            ),
+            itemCount: controller.users.length,
+            itemBuilder: (context, index) {
+              final user = controller.users[index];
+              return UserGridItem(user: user);
+            },
+          ),
+        ),
+        if (controller.isLoadMoreRunning.value)
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Center(child: CircularProgressIndicator()),
+          ),
+      ],
+    );
   }
 
   AppBar _buildAppBar() {

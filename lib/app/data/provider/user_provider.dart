@@ -7,7 +7,7 @@ class UserProvider {
   final http.Client httpClient;
   UserProvider({required this.httpClient});
 
-  final String _baseUrl = dotenv.env['BASE_URL'] ?? '';
+  //final String _baseUrl = dotenv.env['BASE_URL'] ?? '';
   final String _baseUrlS = dotenv.env['BASE_URL_SUPABASE'] ?? '';
 
   Future<UserApiResponseModel> getUsers({int page = 1}) async {
